@@ -42,5 +42,5 @@ class RegisterController extends Controller
                 'telepon' => $data['telepon'],
             ]);
             return redirect('/login');
+        }
     }
-}

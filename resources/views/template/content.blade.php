@@ -19,12 +19,6 @@
 
     <!-- Main content -->
     <section class="content">
-
-      <!-- Default box -->
-      <div class="card">
-        <div class="card-header">
-          <h3 class="card-title">MASUKAN DATA</h3>
-      </div>
       <!-- /.card -->
       @yield('content')
 

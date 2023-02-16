@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Pengaduan;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PengaduanController extends Controller
 {
@@ -16,8 +18,8 @@ class PengaduanController extends Controller
     public function index()
     {
         //
-        return view('pengaduan.index'
-        );
+        $pengaduans = Pengaduan::select('id','tgl_pengaduan','isi_laporan', 'status')->where('users_id', Auth::user()->id)->get();
+        return view('pengaduan.index', compact('pengaduans'));
     }
 
     /**
@@ -28,7 +30,8 @@ class PengaduanController extends Controller
     public function create()
     {
         //
-        return view('pengaduan.create');
+        $pengaduans = Pengaduan::all();
+        return view('pengaduan.create',compact('pengaduans'));
     }
 
     /**
@@ -41,17 +44,26 @@ class PengaduanController extends Controller
     {
         //
         $request->validate([
-            'isi_laporan' => 'required',
-            'foto' => 'required',
+            'isi_laporan' => 'required|min:10',
+            'foto' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+        ], [
+            'isi_laporan.required'      => 'Isi laporan wajib di isi',
+            'isi_laporan.min'           => 'Isi laporan minimal 10 Karakter',
+            'foto.required'             => 'Foto Wajib Disi',
+            'foto.mimes'                => 'Wajib Foto dengan ekstensi .jpg , .jpeg, .png',
+            'foto.max'                  => 'Maksimal size 2MB'
         ]);
+        // $filename = $request->file()->
+        $path = $request->file('foto')->store('public/img/');
 
         Pengaduan::create([
-            'users_id' => Auth::userId(),
+            'users_id' => Auth::user()->id,
             'tgl_pengaduan' => Carbon::now()->format('Y-m-d'),
             'isi_laporan' => $request->isi_laporan,
-            'foto' => $request->foto,
-            'status' => $request->status
+            'foto' => $path,
+            'status' => '0'
         ]);
+
         return redirect('/pengaduan');
     }
 
@@ -64,6 +76,9 @@ class PengaduanController extends Controller
     public function show(Pengaduan $pengaduan)
     {
         //
+        // $pengaduans = Pengaduan::all()->where('id', $pengaduan->id);
+        $pengaduans = Pengaduan::find($pengaduan->id);
+        return view('pengaduan.show', compact('pengaduan'));
     }
 
     /**
@@ -75,6 +90,8 @@ class PengaduanController extends Controller
     public function edit(Pengaduan $pengaduan)
     {
         //
+        $pengaduans = Pengaduan::find($pengaduan->id);
+        return view('pengaduan.edit', compact('pengaduan'));
     }
 
     /**
@@ -87,6 +104,19 @@ class PengaduanController extends Controller
     public function update(Request $request, Pengaduan $pengaduan)
     {
         //
+        $request->validate([
+            'users_id' => 'required',
+            'tgl_pengaduan' => 'required',
+            'isi_laporan' => 'required',
+            'foto' => 'required',
+        ]);
+        $pengaduans = Pengaduan::find($pengaduan->id);
+        $pengaduans->   users_id           =  $request->users_id;
+        $pengaduans->   tgl_pengaduan         =  $request->tgl_pengaduan;
+        $pengaduans->   isi_laporan           =  $request->isi_laporan;
+        $pengaduans->   foto      =  $request->foto;
+        $pengaduans->update();
+        return redirect('/pengaduan');
     }
 
     /**
@@ -98,5 +128,8 @@ class PengaduanController extends Controller
     public function destroy(Pengaduan $pengaduan)
     {
         //
+        $pengaduans = $pengaduan::find($pengaduan->id);
+        $pengaduans->delete();
+        return redirect('pengaduan');
     }
 }

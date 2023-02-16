@@ -9,30 +9,34 @@
     </div>
     <!-- /.card-header -->
     <!-- form start -->
-    <form action="{{ route('pengaduan.store')}}" method="POST">
-        @csrf
+    <form action="{{ route('pengaduan.store') }}" method="POST" enctype="multipart/form-data">
+      @csrf
       <div class="card-body">
           <div class="form-group">
-            <label for="Nama">Tanggal Pengaduan</label>
-            <input type="date" name="tgl_pengaduan" class="form-control" id="tgl_pengaduan" placeholder="tanggal_pengaduan">
-          </div>
-        <div class="form-group">
             <label for="Alamat">Isi Laporan</label>
-            <textarea class="form-control" name="isi_laporan" rows="3" id="isi_laporan" placeholder="isi_laporan"></textarea>
+            <textarea 
+              class="form-control" 
+              name="isi_laporan" rows="5" 
+              id="isi_laporan" placeholder="isi_laporan">{{ old('isi_laporan') }}</textarea>
           </div>
-          
+          @error('isi_laporan')
+            <div class="alert alert-danger" role="alert">{{ $message }}</div>
+          @enderror
           <div class="form-group" >
-          <label for="formFile" class="form-label">Pilih File</label>
-
-          <input class="form-control" type="file" id="formFile">
+            <label for="formFile" class="form-label">Pilih File</label>
+            <input class="form-control" type="file" id="formFile" name="foto">
           </div>
+          @error('foto')
+            <div class="alert alert-danger" role="alert">{{ $message }}</div>
+          @enderror
         </div>
-        <a href="/pengaduan" class="btn btn-primary mr-3" style="float:right;">Submit</button>
-        <a href="/pengaduan" class="btn btn-primary ml-3" style="float:left;">Back</a>
-        </p>
-      </div>
-    </form>
-  </div>
+      </p>
+    </div>
+    <div class="card-footer">
+      <input type="submit" class="btn btn-outline-primary ml-3" style="float:right;" value="Submit">
+      <a href="/pengaduan" class="btn btn-outline-secondary ml-3" style="float:left;">Back</a>
+    </div>
+  </form>
 </div>
 <!-- Optional JavaScript; choose one of the two! -->
 

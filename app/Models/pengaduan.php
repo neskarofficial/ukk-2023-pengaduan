@@ -20,7 +20,7 @@ class Pengaduan extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User','id'.'users_id');
+        return $this->belongsTo('App\Models\User','users_id','id');
     }
 
     public function tanggapan()

@@ -13,44 +13,47 @@
         <i class="fas fa-plus"></i>
       Pengaduan</a>
 
-</a>
+
     </div>
     <!-- /.card-header -->
     <div class="card-body">
       <table id="example2" class="table table-bordered table-hover">
         <thead>
         <tr>
-          <th>Users_Id</th>
-          <th>Tanggal_Pengaduan</th>
-          <th>Isi_Laporan</th>
-          <th>Foto</th>
+          <th>No</th>
+          <th>Tanggal Pengaduan</th>
+          <th>Isi Laporan</th>
           <th>Status</th>
           <th>Actions</th>
         </tr>
         </thead>
         <tbody>
-           
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td> </td>
-          
-          <td>
-          <form action="/pengaduan/" method="POST">
-          <a class="btn btn-primary"  href="pengaduan/">Detail</a>
-          <a class="btn btn-warning" href="pengaduan//edit">Edit</a>
-          
-            @csrf
-            @method('DELETE')
-          <input type="submit" Class="btn btn-danger" value="Delete">
-          </form>
-            </td>
-        </tr>
-       
-      </table>
-    </div>
+        @forelse ($pengaduans as $item)
+          <tr>
+            <td>{{ $loop->iteration }}</td>
+            <td>{{ $item->tgl_pengaduan }}</td>
+            <td>{{ $item->isi_laporan }}</td>
+            <td>{{ $item->status == '0' ? 'Belum' : $item->status }}</td>
+            <td>
+              <form action="{{ route('pengaduan.destroy', $item->id) }}" method="POST">
+                @if ($item->status == '0')
+                  <a class="btn btn-primary"  href="/pengaduan/{{ $item->id }}/">Detail</a>
+                  <a class="btn btn-warning" href="{{ route('pengaduan.edit',  $item->id) }}">Edit</a>
+                  @csrf
+                  @method('DELETE')
+                  @else
+                  <a class="btn btn-primary"  href="pengaduan/">Detail</a>
+                  @endif
+                  <input type="submit" Class="btn btn-danger" value="Delete">
+                </form>
+              </td>
+            </tr>
+            @empty
+            
+            @endforelse
+            
+          </table>
+        </div>
     <!-- /.card-body -->
   
 @endsection

@@ -30,7 +30,7 @@ Route::post('login', [LoginController::class,'proses'])->name('login.proses')->m
 
 Route::get('logout', [LoginController::class, 'logout'])->name('logout.petugas');
 
-Route::get('/dashboard/admin',[DashboardController::class,'admin'])->name('dashboard.admin')->middleware('auth');
+Route::get('/dashboard/admin',[DashboardController::class,'admin'])->name('dashboard.admin')->middleware('auth', 'level:admin');
 Route::get('/dashboard/petugas', [DashboardController::class, 'petugas'])->name('dashboard.petugas')->middleware('auth');
 Route::get('/dashboard/masyarakat', [DashboardController::class, 'masyarakat'])->name('dashboard.masyarakat')->middleware('auth');
 
