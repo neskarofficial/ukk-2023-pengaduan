@@ -4,7 +4,7 @@
 
 <div class="row">
 <div class="col-md-12">
-  <div class="card card-primary">
+  <div class="card card-cyan">
     <div class="card-header">
       <h1 class="card-title">PENGADUAN MASYARAKAT</h1>
     </div>

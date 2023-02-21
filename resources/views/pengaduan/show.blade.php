@@ -3,7 +3,8 @@
 @section('content')
 
 <div class="col-md-12">
-  <div class="card card-secondary ">
+  <div class="row 6">
+  <div class="card card-secondary">
     <div class="card-header">
       <h1 class="card-title">PENGADUAN MASYARAKAT</h1>
     </div>
@@ -29,15 +30,14 @@
           <div class="form-group" >
             <label for="formFile" class="form-label">Foto</label>
             <img src="{{ url('storage/' . $pengaduan->foto) }}" alt="" srcset="">
-          </div>
-
-        </div>
+          </div>  
       </p>
     </div>
     <div class="card-footer">
       <a href="/pengaduan" class="btn btn-secondary ml-3" style="float:left;">Back</a>
     </div>
     
+  </div>
   </div>
 </div>
 <!-- Optional JavaScript; choose one of the two! -->

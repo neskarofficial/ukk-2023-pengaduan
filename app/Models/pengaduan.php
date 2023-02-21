@@ -15,7 +15,8 @@ class Pengaduan extends Model
      'tgl_pengaduan',
      'isi_laporan',
      'foto',
-     'status'
+     'status',
+     'email'
     ];
 
     public function user()

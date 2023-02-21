@@ -20,6 +20,7 @@ class RegisterController extends Controller
                 'username' => 'required|unique:users,username',
                 'password' => 'required|min:8',
                 'telepon' => 'required|numeric',
+                
             ],
             [
                 'name.required' => 'Nama tidak boleh kosong',

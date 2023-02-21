@@ -12,6 +12,10 @@ class LoginController extends Controller
     {
         return view('auth.login');
     }
+    public function forgot()
+    {
+        return view('auth.forgot');
+    }
 
     public function proses(request $request)
     {

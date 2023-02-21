@@ -18,7 +18,7 @@ class PengaduanController extends Controller
     public function index()
     {
         //
-        $pengaduans = Pengaduan::select('id','tgl_pengaduan','isi_laporan', 'status')->where('users_id', Auth::user()->id)->get();
+        $pengaduans = Pengaduan::all();
         return view('pengaduan.index', compact('pengaduans'));
     }
 
@@ -92,6 +92,7 @@ class PengaduanController extends Controller
         //
         $pengaduans = Pengaduan::find($pengaduan->id);
         return view('pengaduan.edit', compact('pengaduan'));
+        
     }
 
     /**
@@ -103,19 +104,23 @@ class PengaduanController extends Controller
      */
     public function update(Request $request, Pengaduan $pengaduan)
     {
-        //
-        $request->validate([
-            'users_id' => 'required',
-            'tgl_pengaduan' => 'required',
-            'isi_laporan' => 'required',
-            'foto' => 'required',
+        
+        // $request->validate([
+        //     'tgl_pengaduan' => 'required',
+        //     'isi_laporan' => 'required',
+        //     'foto' => 'required'
+        // ]);
+        
+        // $pengaduans = Pengaduan::find($pengaduan->id);
+        // $pengaduan->   tgl_pengaduan         =  $request->tgl_pengaduan;
+        // $pengaduan->   isi_laporan           =  $request->isi_laporan;
+        // $pengaduan->   foto                  =  $request->foto;
+        // $pengaduan->update();
+
+        $pengaduan->update([
+            'tgl_pengaduan' => $request->tgl_pengaduan,
+            'isi_laporan' => $request->isi_laporan,
         ]);
-        $pengaduans = Pengaduan::find($pengaduan->id);
-        $pengaduans->   users_id           =  $request->users_id;
-        $pengaduans->   tgl_pengaduan         =  $request->tgl_pengaduan;
-        $pengaduans->   isi_laporan           =  $request->isi_laporan;
-        $pengaduans->   foto      =  $request->foto;
-        $pengaduans->update();
         return redirect('/pengaduan');
     }
 

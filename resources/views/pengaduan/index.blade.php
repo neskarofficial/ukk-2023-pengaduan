@@ -5,8 +5,8 @@
 @endsection
 
 @section('content')
-<div class="card">
-    <div class="card-header">
+<div class="card card-white">
+    <div class="card-header ">
       <h3 class="card-title"></h3>
       <div class="col card-header text-right">
       <a class="btn btn-primary"  href="{{ route('pengaduan.create') }}">
