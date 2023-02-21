@@ -13,7 +13,7 @@
           <img src="{{asset ('adminlte/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block"><b>TUHAN MARKOS</b></a>
+          <a href="#" class="d-block"><b>{{ auth()->user()->name }}</b></a>
         </div>
       </div>
 
@@ -32,8 +32,6 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -64,7 +62,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="/pengaduan" class="nav-link">
+            <a href="{{ route('pengaduan.index') }}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Pengaduan
