@@ -38,8 +38,6 @@ Route::get('logout', [LoginController::class, 'logout'])->name('logout.petugas')
 Route::get('register', [RegisterController::class, 'view'])->name('register')->middleware(('guest'));
 Route::post('register', [RegisterController::class, 'store'])->name('register-store')->middleware(('guest'));
 
-Route::view('error/403', 'error.403')->name('error.403');
-
 Route::get('pengaduan/{pengaduan}/tanggapan', [TanggapanController::class, 'create'])->name('tanggapan.create');
 
 Route::middleware(['auth', 'level:admin'])->group(function () {
@@ -54,3 +52,4 @@ Route::middleware(['auth', 'level:masyarakat'])->group(function () {
     Route::get('/dashboard/masyarakat', [DashboardController::class, 'masyarakat'])->name('dashboard.masyarakat');
 });
 
+Route::view('error/403', 'error.403')->name('error.403');

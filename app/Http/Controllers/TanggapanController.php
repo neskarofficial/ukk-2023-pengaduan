@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Tanggapan;
+use App\Models\{
+    Tanggapan,
+    Pengaduan,
+};
 use Illuminate\Http\Request;
 
 class TanggapanController extends Controller
@@ -22,9 +25,11 @@ class TanggapanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Pengaduan $pengaduan)
     {
         //
+        $pengaduans = Pengaduan::find($pengaduan->id);
+        return view('tanggapan.create', compact('pengaduans'));
     }
 
     /**
