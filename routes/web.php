@@ -39,6 +39,7 @@ Route::get('register', [RegisterController::class, 'view'])->name('register')->m
 Route::post('register', [RegisterController::class, 'store'])->name('register-store')->middleware(('guest'));
 
 Route::get('pengaduan/{pengaduan}/tanggapan', [TanggapanController::class, 'create'])->name('tanggapan.create');
+Route::post('pengaduan/{pengaduan}', [TanggapanController::class, 'store'])->name('tanggapan.store');
 
 Route::middleware(['auth', 'level:admin'])->group(function () {
     Route::get('/dashboard/admin',[DashboardController::class,'admin'])->name('dashboard.admin');

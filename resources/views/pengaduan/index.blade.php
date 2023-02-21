@@ -48,7 +48,12 @@
                     @endif
                 @else
                   <a class="btn btn-primary"  href="pengaduan/">Detail</a>
+                  @if ($item->status == 'selesai')
+                  <a class="btn btn-secondary"  href="">Cetak</a>
+
+                  @else
                   <a class="btn btn-secondary"  href="{{ route('tanggapan.create', $item->id) }}">Tanggapan</a>
+                  @endif
                 @endif
                 </form>
               </td>

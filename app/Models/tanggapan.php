@@ -10,8 +10,8 @@ class Tanggapan extends Model
     use HasFactory;
     protected $table = 'tanggapans';
     protected $fillable = [
-      'pengaduans_Id',
-      'users_Id',
+      'pengaduans_id',
+      'users_id',
       'tgl_tanggapan',
       'tanggapan',
     ];
